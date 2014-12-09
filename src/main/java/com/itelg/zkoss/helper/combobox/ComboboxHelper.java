@@ -1,5 +1,6 @@
 package com.itelg.zkoss.helper.combobox;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.zkoss.zul.Combobox;
@@ -10,8 +11,6 @@ public class ComboboxHelper
 {
 	public static <T> void init(Combobox combobox, List<T> items, ComboitemRenderer<T> itemRenderer)
 	{
-		boolean firstSelected = false;
-
 		for (T item : items)
 		{
 			Comboitem comboitem = new Comboitem();
@@ -23,13 +22,12 @@ public class ComboboxHelper
 				itemRenderer.render(comboitem, item, 0);
 
 			} catch (Exception e) { }
-
-			if (firstSelected == false)
-			{
-				combobox.setSelectedItem(comboitem);
-				firstSelected = true;
-			}
 		}
+	}
+	
+	public static <T> void init(Combobox combobox, T[] items, ComboitemRenderer<T> itemRenderer)
+	{
+		init(combobox, Arrays.asList(items), itemRenderer);
 	}
 
 	public static <T> void init(Combobox combobox, List<T> items, T selectedItem, ComboitemRenderer<T> itemRenderer)
@@ -51,5 +49,24 @@ public class ComboboxHelper
 				combobox.setSelectedItem(comboitem);
 			}
 		}
+	}
+	
+	public static <T> void init(Combobox combobox, T[] items, T selectedItem, ComboitemRenderer<T> itemRenderer)
+	{
+		init(combobox, Arrays.asList(items), selectedItem, itemRenderer);
+	}
+	
+	public static void setDefaultItem(Combobox combobox, String label)
+	{
+		setDefaultItem(combobox, label, null);
+	}
+	
+	public static void setDefaultItem(Combobox combobox, String label, Object value)
+	{
+		Comboitem defaultItem = new Comboitem();
+		defaultItem.setLabel(label);
+		defaultItem.setValue(value);
+		combobox.appendChild(defaultItem);
+		combobox.setSelectedItem(defaultItem);
 	}
 }
