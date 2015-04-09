@@ -1,9 +1,11 @@
 package com.itelg.zkoss.helper.listbox;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
@@ -17,6 +19,8 @@ import org.zkoss.zul.Textbox;
 
 public class ListcellHelper
 {
+	private static final Logger log = LoggerFactory.getLogger(ListcellHelper.class);
+
 	public static Listcell buildEditableTextboxListcell(String currentValue, EventListener<InputEvent> onchangeListener)
 	{
 		Listcell listcell = new Listcell();
@@ -29,29 +33,34 @@ public class ListcellHelper
 		return listcell;
 	}
 
+	public static Listcell buildDateListcell(Date date)
+	{
+		return buildDateListcell(date, "");
+	}
+	
 	public static Listcell buildDateListcell(Date date, String nullMessage)
 	{
-		return new Listcell(date != null ? new SimpleDateFormat("dd.MM.yyyy").format(date) : nullMessage);
+		return buildDateListcell(date, nullMessage, "dd.MM.yyyy");
 	}
 
 	public static Listcell buildDateListcell(Date date, String nullMessage, String dateFormat)
 	{
-		return new Listcell(date != null ? new SimpleDateFormat(dateFormat).format(date) : nullMessage);
+		return new Listcell(date != null ? DateFormatUtils.format(date, dateFormat) : nullMessage);
+	}
+	
+	public static Listcell buildDateTimeListcell(Date date)
+	{
+		return buildDateTimeListcell(date, "");
 	}
 
 	public static Listcell buildDateTimeListcell(Date date, String nullMessage)
 	{
-		return new Listcell(date != null ? new SimpleDateFormat("dd.MM.yyyy HH:mm").format(date) : nullMessage);
+		return buildDateTimeListcell(date, nullMessage, "dd.MM.yyyy HH:mm");
 	}
 
-	public static Listcell buildDateTimeListcell(Date date)
+	public static Listcell buildDateTimeListcell(Date date, String nullMessage, String dateTimeFormat)
 	{
-		return new Listcell(date != null ? new SimpleDateFormat("dd.MM.yyyy HH:mm").format(date) : "");
-	}
-
-	public static Listcell buildDateTimeListcell(Date date, String nullMessage, String dateFormat)
-	{
-		return new Listcell(date != null ? new SimpleDateFormat(dateFormat).format(date) : nullMessage);
+		return new Listcell(date != null ? DateFormatUtils.format(date, dateTimeFormat) : nullMessage);
 	}
 
 	public static <T> Listcell buildSelectboxListcell(List<T> items, EventListener<SelectEvent<Comboitem, T>> onselectListener, T selectedItem)
@@ -92,8 +101,11 @@ public class ListcellHelper
 			try
 			{
 				itemRenderer.render(comboitem, item, 0);
-
-			} catch (Exception e) { }
+			}
+			catch (Exception e)
+			{
+				log.warn(e.getMessage(), e);
+			}
 
 			if (item.equals(selectedItem))
 			{

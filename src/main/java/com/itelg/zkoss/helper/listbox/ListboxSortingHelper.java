@@ -43,9 +43,9 @@ public class ListboxSortingHelper
 				if (sortDirection.equals("ascending"))
 				{
 					return new Sorting(listheader.getSortAscending(), true);
-
-				} else if (sortDirection.equals("descending")) {
-
+				}
+				else if (sortDirection.equals("descending"))
+				{
 					return new Sorting(listheader.getSortDescending(), false);
 				}
 			}

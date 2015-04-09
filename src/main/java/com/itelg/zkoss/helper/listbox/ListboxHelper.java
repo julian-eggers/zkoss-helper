@@ -8,12 +8,13 @@ public class ListboxHelper
 {
 	public static void hideIfEmtpy(Listbox listbox)
 	{
-		if (listbox.getModel().getSize() > 0)
+		if (listbox.getModel() != null &&
+				listbox.getModel().getSize() > 0)
 		{
 			listbox.setVisible(true);
-
-		} else {
-
+		}
+		else
+		{
 			listbox.setVisible(false);
 		}
 	}
@@ -38,9 +39,9 @@ public class ListboxHelper
 			{
 				emptyLabelComponent.detach();
 			}
-
-		} else {
-
+		}
+		else
+		{
 			listbox.setVisible(false);
 
 			if (emptyLabelComponent == null)
