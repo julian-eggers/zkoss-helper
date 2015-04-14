@@ -9,12 +9,16 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.ComboitemRenderer;
 
+import com.itelg.zkoss.helper.component.ComponentHelper;
+
 public class ComboboxHelper
 {
 	private static final Logger log = LoggerFactory.getLogger(ComboboxHelper.class);
 
 	public static <T> void init(Combobox combobox, List<T> items, ComboitemRenderer<T> itemRenderer)
 	{
+		ComponentHelper.removeAllChildren(combobox);
+		
 		for (T item : items)
 		{
 			Comboitem comboitem = new Comboitem();
@@ -39,6 +43,8 @@ public class ComboboxHelper
 
 	public static <T> void init(Combobox combobox, List<T> items, T selectedItem, ComboitemRenderer<T> itemRenderer)
 	{
+		ComponentHelper.removeAllChildren(combobox);
+		
 		for (T item : items)
 		{
 			Comboitem comboitem = new Comboitem();

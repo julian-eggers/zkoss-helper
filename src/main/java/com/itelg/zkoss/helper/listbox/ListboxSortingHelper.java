@@ -11,6 +11,37 @@ import org.zkoss.zul.ext.Sortable;
 
 public class ListboxSortingHelper
 {
+    @SuppressWarnings("unchecked")
+    private static Comparator<Object> getComparator(Listbox listbox, int column, boolean ascending)
+    {
+        List<Component> components = listbox.getListhead().getChildren();
+        int i = 0;
+        for (Component component : components)
+        {
+            if (Listheader.class.isAssignableFrom(component.getClass()))
+            {
+                if (i == column)
+                {
+                    Listheader listheader = (Listheader) component;
+                    return ascending ? listheader.getSortAscending() : listheader.getSortDescending();
+                }
+                i++;
+            }
+        }
+        return null;
+    }
+	
+    public static void sortListbox(Listbox listbox, int column, boolean ascending)
+    {
+        ListModel<Object> model = listbox.getModel();
+        if (Sortable.class.isAssignableFrom(model.getClass()))
+        {
+            @SuppressWarnings("unchecked") Sortable<Object> sortable = (Sortable<Object>) model;
+            Comparator<Object> cmpr = getComparator(listbox, column, ascending);
+            sortable.sort(cmpr, ascending);
+        }
+    }
+	
 	public static void resortListbox(Listbox listbox)
 	{
 		ListModel<Object> model = listbox.getModel();
