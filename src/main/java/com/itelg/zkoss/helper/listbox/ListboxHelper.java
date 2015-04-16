@@ -6,10 +6,9 @@ import org.zkoss.zul.Listbox;
 
 public class ListboxHelper
 {
-	public static void hideIfEmtpy(Listbox listbox)
+	public static void hideIfEmpty(Listbox listbox)
 	{
-		if (listbox.getModel() != null &&
-				listbox.getModel().getSize() > 0)
+		if (isNotEmpty(listbox))
 		{
 			listbox.setVisible(true);
 		}
@@ -19,7 +18,7 @@ public class ListboxHelper
 		}
 	}
 
-	public static void hideIfEmtpy(Listbox listbox, String emptyMessage)
+	public static void hideIfEmpty(Listbox listbox, String emptyMessage)
 	{
 		Component emptyLabelComponent = null;
 
@@ -31,7 +30,7 @@ public class ListboxHelper
 			}
 		}
 
-		if (listbox.getModel().getSize() > 0)
+		if (isNotEmpty(listbox))
 		{
 			listbox.setVisible(true);
 
@@ -51,5 +50,15 @@ public class ListboxHelper
 				listbox.getParent().appendChild(emptyLabel);
 			}
 		}
+	}
+	
+	public static boolean isEmpty(Listbox listbox)
+	{
+		return listbox.getModel() != null && listbox.getModel().getSize() == 0;
+	}
+	
+	public static boolean isNotEmpty(Listbox listbox)
+	{
+		return listbox.getModel() != null && listbox.getModel().getSize() > 0;
 	}
 }
