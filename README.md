@@ -13,7 +13,7 @@ Some helpers to extend and simplify the [Zkoss](http://www.zkoss.org/ "Zkoss-Fra
 		<id>itelg</id>
 		<url>http://mvnrepo.itelg.com/release</url>
 	</repository>
-	</repositories>
+</repositories>
 <dependencies>
 	<dependency>
 		<groupId>com.itelg</groupId>
