@@ -8,17 +8,17 @@ Some helpers to extend and simplify the [Zkoss](http://www.zkoss.org/ "Zkoss-Fra
 
 #### Maven
 ```xml
-	<repositories>
-		<repository>
-		  <id>itelg</id>
-		  <url>http://mvnrepo.itelg.com/release</url>
-		</repository>
+<repositories>
+	<repository>
+		<id>itelg</id>
+		<url>http://mvnrepo.itelg.com/release</url>
+	</repository>
 	</repositories>
-	<dependencies>
-	  	<dependency>
-			  <groupId>com.itelg</groupId>
-			  <artifactId>zkoss-helper</artifactId>
-			  <version>0.0.9-RELEASE</version>
-		</dependency>
-	</dependencies>
+<dependencies>
+	<dependency>
+		<groupId>com.itelg</groupId>
+		<artifactId>zkoss-helper</artifactId>
+		<version>0.0.9-RELEASE</version>
+	</dependency>
+</dependencies>
 ```
