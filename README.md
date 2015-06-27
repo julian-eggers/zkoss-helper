@@ -18,7 +18,7 @@ Some helpers to extend and simplify the [Zkoss](http://www.zkoss.org/ "Zkoss-Fra
 	<dependency>
 		<groupId>com.itelg</groupId>
 		<artifactId>zkoss-helper</artifactId>
-		<version>0.0.9-RELEASE</version>
+		<version>0.0.10-RELEASE</version>
 	</dependency>
 </dependencies>
 ```
