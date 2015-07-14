@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +40,7 @@ public class ListcellHelper
 	{
 		return buildDateListcell(date, "");
 	}
-	
+
 	public static Listcell buildDateListcell(Date date, String nullMessage)
 	{
 		return buildDateListcell(date, nullMessage, "dd.MM.yyyy");
@@ -49,7 +50,7 @@ public class ListcellHelper
 	{
 		return new Listcell(date != null ? DateFormatUtils.format(date, dateFormat) : nullMessage);
 	}
-	
+
 	public static Listcell buildDateTimeListcell(Date date)
 	{
 		return buildDateTimeListcell(date, "");
@@ -64,22 +65,22 @@ public class ListcellHelper
 	{
 		return new Listcell(date != null ? DateFormatUtils.format(date, dateTimeFormat) : nullMessage);
 	}
-	
+
 	public static Listcell buildDateTimeListcell(LocalDateTime dateTime)
 	{
 		return buildDateTimeListcell(dateTime, "", DateTimeFormatter.ISO_DATE_TIME);
 	}
-	
+
 	public static Listcell buildDateTimeListcell(LocalDateTime dateTime, DateTimeFormatter formatter)
 	{
 		return buildDateTimeListcell(dateTime, "", formatter);
 	}
-	
+
 	public static Listcell buildDateTimeListcell(LocalDateTime dateTime, String nullMessage)
 	{
 		return buildDateTimeListcell(dateTime, nullMessage, DateTimeFormatter.ISO_DATE_TIME);
 	}
-	
+
 	public static Listcell buildDateTimeListcell(LocalDateTime dateTime, String nullMessage, DateTimeFormatter formatter)
 	{
 		return new Listcell(dateTime != null ? formatter.format(dateTime) : nullMessage);
@@ -155,5 +156,71 @@ public class ListcellHelper
 		textbox.setWidth("100%");
 
 		return listcell;
+	}
+
+	public static Listcell buildStringListcell(String value)
+	{
+		return buildStringListcell(value, null);
+	}
+
+	public static Listcell buildStringListcell(String value, String nullMessage)
+	{
+		return new Listcell(value != null ? value : nullMessage);
+	}
+
+	public static Listcell buildStringListcell(String value, String nullMessage, int maxLength)
+	{
+		Listcell listcell = new Listcell();
+
+		if (value != null)
+		{
+			listcell.setLabel(value);
+			listcell.setTooltiptext(value);
+
+			if (value.length() > maxLength)
+			{
+				listcell.setLabel(value.substring(0, maxLength) + "...");
+			}
+		}
+		else
+		{
+			listcell.setLabel(nullMessage);
+		}
+
+		return listcell;
+	}
+
+	public static Listcell buildStringListcell(String value, int maxLength)
+	{
+		Listcell listcell = new Listcell(value);
+		listcell.setTooltiptext(value);
+
+		if (StringUtils.isNotEmpty(value) &&
+				value.length() > maxLength)
+		{
+			listcell.setLabel(value.substring(0, maxLength) + "...");
+		}
+
+		return listcell;
+	}
+
+	public static Listcell buildIntegerListcell(Integer value)
+	{
+		return buildIntegerListcell(value, null);
+	}
+
+	public static Listcell buildIntegerListcell(Integer value, String nullMessage)
+	{
+		return new Listcell(value != null ? value.toString() : nullMessage);
+	}
+
+	public static Listcell buildLongListcell(Long value)
+	{
+		return buildLongListcell(value, null);
+	}
+
+	public static Listcell buildLongListcell(Long value, String nullMessage)
+	{
+		return new Listcell(value != null ? value.toString() : nullMessage);
 	}
 }
