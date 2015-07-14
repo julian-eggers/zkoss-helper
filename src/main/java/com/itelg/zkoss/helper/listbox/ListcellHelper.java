@@ -1,5 +1,7 @@
 package com.itelg.zkoss.helper.listbox;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -61,6 +63,26 @@ public class ListcellHelper
 	public static Listcell buildDateTimeListcell(Date date, String nullMessage, String dateTimeFormat)
 	{
 		return new Listcell(date != null ? DateFormatUtils.format(date, dateTimeFormat) : nullMessage);
+	}
+	
+	public static Listcell buildDateTimeListcell(LocalDateTime dateTime)
+	{
+		return buildDateTimeListcell(dateTime, "", DateTimeFormatter.ISO_DATE_TIME);
+	}
+	
+	public static Listcell buildDateTimeListcell(LocalDateTime dateTime, DateTimeFormatter formatter)
+	{
+		return buildDateTimeListcell(dateTime, "", formatter);
+	}
+	
+	public static Listcell buildDateTimeListcell(LocalDateTime dateTime, String nullMessage)
+	{
+		return buildDateTimeListcell(dateTime, nullMessage, DateTimeFormatter.ISO_DATE_TIME);
+	}
+	
+	public static Listcell buildDateTimeListcell(LocalDateTime dateTime, String nullMessage, DateTimeFormatter formatter)
+	{
+		return new Listcell(dateTime != null ? formatter.format(dateTime) : nullMessage);
 	}
 
 	public static <T> Listcell buildSelectboxListcell(List<T> items, EventListener<SelectEvent<Comboitem, T>> onselectListener, T selectedItem)
