@@ -44,7 +44,12 @@ public class Labels
 
 	public static String getEnumKey(Enum<?> object)
 	{
-		return object.getClass().getName() + "." + object.name();
+		if (object != null)
+		{
+			return object.getClass().getName() + "." + object.name();
+		}
+
+		return "";
 	}
 
 	public static String getEnumKey(Enum<?> object, String postFix)
