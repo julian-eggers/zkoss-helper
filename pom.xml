@@ -3,7 +3,9 @@
 	<groupId>com.itelg</groupId>
 	<artifactId>zkoss-helper</artifactId>
 	<name>zkoss-helper</name>
-	<version>0.1.0.RELEASE</version>
+	<description>Some helpers to extend and simplify the Zkoss-API</description>
+	<url>https://github.com/julian-eggers/zkoss-helper</url>
+	<version>0.2.0-RELEASE</version>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -24,8 +26,16 @@
 		</developer>
 	</developers>
 
+	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>http://www.opensource.org/licenses/mit-license.php</url>
+		</license>
+	</licenses>
+
 	<build>
 		<plugins>
+			<!-- BUILD AND FILES -->
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.3</version>
@@ -62,6 +72,21 @@
 				</executions>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.6</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- TEST AND COVERAGE -->
+			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.7.5.201505241946</version>
@@ -96,6 +121,7 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+			<!-- DEPLOYMENT -->
 			<plugin>
 				<groupId>de.jutzig</groupId>
 				<artifactId>github-release-plugin</artifactId>
@@ -115,23 +141,19 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>1.6.6</version>
+				<extensions>true</extensions>
+				<configuration>
+					<serverId>ossrh</serverId>
+					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+					<autoReleaseAfterClose>true</autoReleaseAfterClose>
+				</configuration>
+			</plugin>
 		</plugins>
-		<extensions>
-			<extension>
-				<groupId>org.springframework.build</groupId>
-				<artifactId>aws-maven</artifactId>
-				<version>5.0.0.RELEASE</version>
-			</extension>
-		</extensions>
 	</build>
-
-	<distributionManagement>
-		<repository>
-			<id>aws-release</id>
-			<name>AWS Release Repository</name>
-			<url>s3://mvnrepo.itelg.com/release</url>
-		</repository>
-	</distributionManagement>
 
 	<dependencies>
 		<dependency>
