@@ -71,11 +71,11 @@ public class ListboxSortingHelper
 				Listheader listheader = (Listheader) component;
 				String sortDirection = listheader.getSortDirection();
 
-				if (sortDirection.equals("ascending"))
+				if ("ascending".equals(sortDirection))
 				{
 					return new Sorting(listheader.getSortAscending(), true);
 				}
-				else if (sortDirection.equals("descending"))
+				else if ("descending".equals(sortDirection))
 				{
 					return new Sorting(listheader.getSortDescending(), false);
 				}
