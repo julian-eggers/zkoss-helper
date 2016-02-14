@@ -3,7 +3,7 @@ package com.itelg.zkoss.helper.listmodel;
 import java.util.Arrays;
 import java.util.List;
 
-import org.fest.assertions.Assertions;
+import org.junit.Assert;
 import org.junit.Test;
 import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
@@ -21,8 +21,9 @@ public class ListModelHelperTest
 	{
 		ListModel<String> listModel = new ListModelList<>(Arrays.asList("string1", "string2"));
 		List<String> elements = ListModelHelper.getElementList(listModel);
-		Assertions.assertThat(elements).isNotNull().hasSize(2);
-		Assertions.assertThat(elements.get(0)).isEqualTo("string1");
-		Assertions.assertThat(elements.get(1)).isEqualTo("string2");
+		Assert.assertNotNull(elements);
+		Assert.assertEquals(2, elements.size());
+		Assert.assertEquals("string1", elements.get(0));
+		Assert.assertEquals("string2", elements.get(1));
 	}
 }
