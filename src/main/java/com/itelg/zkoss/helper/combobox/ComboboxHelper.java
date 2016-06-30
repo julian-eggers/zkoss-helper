@@ -11,72 +11,72 @@ import org.zkoss.zul.ComboitemRenderer;
 
 public class ComboboxHelper
 {
-	private static final Logger log = LoggerFactory.getLogger(ComboboxHelper.class);
+    private static final Logger log = LoggerFactory.getLogger(ComboboxHelper.class);
 
-	public static <T> void init(Combobox combobox, List<T> items, ComboitemRenderer<T> itemRenderer)
-	{
-		for (T item : items)
-		{
-			Comboitem comboitem = new Comboitem();
-			comboitem.setValue(item);
-			comboitem.setParent(combobox);
+    public static <T> void init(Combobox combobox, List<T> items, ComboitemRenderer<T> itemRenderer)
+    {
+        for (T item : items)
+        {
+            Comboitem comboitem = new Comboitem();
+            comboitem.setValue(item);
+            comboitem.setParent(combobox);
 
-			try
-			{
-				itemRenderer.render(comboitem, item, 0);
-			}
-			catch (Exception e)
-			{
-				log.warn(e.getMessage(), e);
-			}
-		}
-	}
+            try
+            {
+                itemRenderer.render(comboitem, item, 0);
+            }
+            catch (Exception e)
+            {
+                log.warn(e.getMessage(), e);
+            }
+        }
+    }
 
-	public static <T> void init(Combobox combobox, T[] items, ComboitemRenderer<T> itemRenderer)
-	{
-		init(combobox, Arrays.asList(items), itemRenderer);
-	}
+    public static <T> void init(Combobox combobox, T[] items, ComboitemRenderer<T> itemRenderer)
+    {
+        init(combobox, Arrays.asList(items), itemRenderer);
+    }
 
-	public static <T> void init(Combobox combobox, List<T> items, T selectedItem, ComboitemRenderer<T> itemRenderer)
-	{
-		for (T item : items)
-		{
-			Comboitem comboitem = new Comboitem();
-			comboitem.setValue(item);
-			comboitem.setParent(combobox);
+    public static <T> void init(Combobox combobox, List<T> items, T selectedItem, ComboitemRenderer<T> itemRenderer)
+    {
+        for (T item : items)
+        {
+            Comboitem comboitem = new Comboitem();
+            comboitem.setValue(item);
+            comboitem.setParent(combobox);
 
-			try
-			{
-				itemRenderer.render(comboitem, item, 0);
-			}
-			catch (Exception e)
-			{
-				log.warn(e.getMessage(), e);
-			}
+            try
+            {
+                itemRenderer.render(comboitem, item, 0);
+            }
+            catch (Exception e)
+            {
+                log.warn(e.getMessage(), e);
+            }
 
-			if (item.equals(selectedItem))
-			{
-				combobox.setSelectedItem(comboitem);
-			}
-		}
-	}
+            if (item.equals(selectedItem))
+            {
+                combobox.setSelectedItem(comboitem);
+            }
+        }
+    }
 
-	public static <T> void init(Combobox combobox, T[] items, T selectedItem, ComboitemRenderer<T> itemRenderer)
-	{
-		init(combobox, Arrays.asList(items), selectedItem, itemRenderer);
-	}
+    public static <T> void init(Combobox combobox, T[] items, T selectedItem, ComboitemRenderer<T> itemRenderer)
+    {
+        init(combobox, Arrays.asList(items), selectedItem, itemRenderer);
+    }
 
-	public static void setDefaultItem(Combobox combobox, String label)
-	{
-		setDefaultItem(combobox, label, null);
-	}
+    public static void setDefaultItem(Combobox combobox, String label)
+    {
+        setDefaultItem(combobox, label, null);
+    }
 
-	public static void setDefaultItem(Combobox combobox, String label, Object value)
-	{
-		Comboitem defaultItem = new Comboitem();
-		defaultItem.setLabel(label);
-		defaultItem.setValue(value);
-		combobox.appendChild(defaultItem);
-		combobox.setSelectedItem(defaultItem);
-	}
+    public static void setDefaultItem(Combobox combobox, String label, Object value)
+    {
+        Comboitem defaultItem = new Comboitem();
+        defaultItem.setLabel(label);
+        defaultItem.setValue(value);
+        combobox.appendChild(defaultItem);
+        combobox.setSelectedItem(defaultItem);
+    }
 }
